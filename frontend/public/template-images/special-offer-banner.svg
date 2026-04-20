@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="250" viewBox="0 0 560 250" role="img" aria-label="Special offer banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="560" height="250" fill="url(#bg)"/>
+  <rect x="36" y="34" width="488" height="182" rx="14" fill="rgba(255,255,255,0.16)"/>
+  <text x="56" y="92" fill="#fff7ed" font-family="Arial, sans-serif" font-size="22" font-weight="700">Limited Time Offer</text>
+  <text x="56" y="140" fill="#ffffff" font-family="Arial, sans-serif" font-size="54" font-weight="800">30% OFF</text>
+  <text x="56" y="174" fill="#ffedd5" font-family="Arial, sans-serif" font-size="20">Annual plans for newsletter teams</text>
+  <rect x="368" y="98" width="136" height="50" rx="10" fill="#fff7ed"/>
+  <text x="392" y="130" fill="#dc2626" font-family="Arial, sans-serif" font-size="22" font-weight="700">Claim</text>
+</svg>

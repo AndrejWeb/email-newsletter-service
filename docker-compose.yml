@@ -1,0 +1,55 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: newsletter-app
+    restart: unless-stopped
+    volumes:
+      - jwt_keys:/var/www/html/config/jwt
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - newsletter-net
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    container_name: newsletter-nginx
+    restart: unless-stopped
+    ports:
+      - "8011:80"
+    depends_on:
+      - app
+    networks:
+      - newsletter-net
+
+  db:
+    image: postgres:16-alpine
+    container_name: newsletter-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: newsletter_db
+      POSTGRES_USER: newsletter_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-newsletter_pass}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U newsletter_user -d newsletter_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - newsletter-net
+
+volumes:
+  pg_data:
+  jwt_keys:
+
+networks:
+  newsletter-net:
+    driver: bridge
